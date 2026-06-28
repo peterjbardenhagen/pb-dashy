@@ -1,0 +1,6 @@
+---
+# Docker Socket Configuration for Homepage
+# Required for container status, resource widgets, and stats
+
+my-docker:
+  socket: /var/run/docker.sock

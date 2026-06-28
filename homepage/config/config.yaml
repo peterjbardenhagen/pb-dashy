@@ -1,0 +1,134 @@
+title: "Hermes Media Centre"
+theme: dark
+color: slate
+headerStyle: clean
+language: en
+target: _self
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: false
+  showSearchSuggestions: true
+  hideVisitURL: false
+  provider: duckduckgo
+
+layout:
+  Media Servers:
+    style: row
+    columns: 3
+  Content Automation:
+    style: row
+    columns: 3
+  Indexers:
+    style: row
+    columns: 2
+  Request Management:
+    style: row
+    columns: 2
+  Analytics & Monitoring:
+    style: row
+    columns: 3
+  Security & Network:
+    style: row
+    columns: 2
+  AI & Knowledge:
+    style: row
+    columns: 2
+
+services:
+  - Media Servers:
+      - Jellyfin:
+          icon: jellyfin.png
+          href: http://localhost:8096
+          description: "Primary Media Server"
+          server: my-docker
+          container: jellyfin
+      - ErsatzTV:
+          icon: https://raw.githubusercontent.com/ErsatzTV/ErsatzTV/main/docs/images/ersatztv-logo.png
+          href: http://localhost:8409
+          description: "Live TV Channels"
+          server: my-docker
+          container: ersatztv
+
+  - Content Automation:
+      - Sonarr:
+          icon: sonarr.png
+          href: http://localhost:8990
+          description: "TV Automation"
+          server: my-docker
+          container: sonarr
+      - Radarr:
+          icon: radarr.png
+          href: http://localhost:7878
+          description: "Movie Automation"
+          server: my-docker
+          container: radarr
+      - Recyclarr:
+          icon: https://raw.githubusercontent.com/recyclarr/recyclarr/main/recyclarr.png
+          description: Quality Profiles
+          server: my-docker
+          container: recyclarr
+
+  - Indexers:
+      - Prowlarr:
+          icon: prowlarr.png
+          href: http://localhost:9696
+          description: "Indexer Manager"
+          server: my-docker
+          container: prowlarr
+      - Bazarr:
+          icon: bazarr.png
+          href: http://localhost:6767
+          description: "Subtitles"
+          server: my-docker
+          container: bazarr
+
+  - Request Management:
+      - Jellyseerr:
+          icon: jellyseerr.png
+          href: http://localhost:5055
+          description: "Jellyfin Requests"
+          server: my-docker
+          container: seerr
+
+  - Analytics & Monitoring:
+      - Jellystat:
+          icon: https://raw.githubusercontent.com/CyferShepard/Jellystat/main/frontend/public/icon-192x192.png
+          href: http://localhost:3004
+          description: "Jellyfin Analytics"
+          server: my-docker
+          container: jellystat
+      - Tautulli:
+          icon: tautulli.png
+          href: http://localhost:8181
+          description: "Plex Analytics"
+          server: my-docker
+          container: tautulli
+      - qBittorrent:
+          icon: qbittorrent.png
+          href: http://localhost:8080
+          description: "Downloads"
+          server: my-docker
+          container: qbittorrent
+
+  - Security & Network:
+      - FlareSolverr:
+          icon: flaresolverr.png
+          href: http://localhost:8191
+          description: "CF Bypass"
+          server: my-docker
+          container: flaresolverr
+      - Huntarr2:
+          icon: https://raw.githubusercontent.com/jonniekarr/huntarr/main/static/logo.png
+          href: http://localhost:9706
+          description: "Usenet Automation"
+          server: my-docker
+          container: huntarr2
+
+  - AI & Knowledge:
+      - Open WebUI:
+          icon: open-webui.png
+          href: http://localhost:3000
+          description: "Ollama Chat UI"
+          server: my-docker
+          container: open-webui
