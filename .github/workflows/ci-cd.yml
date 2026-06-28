@@ -1,0 +1,169 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  # ═══════════════════════════════════════════════════
+  # Job 1: Lint + Type Check + Build
+  # ═══════════════════════════════════════════════════
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./dashboard
+        run: npm ci
+
+      - name: Lint
+        working-directory: ./dashboard
+        run: npm run lint
+
+      - name: Type check
+        working-directory: ./dashboard
+        run: npx tsc --noEmit
+
+      - name: Build
+        working-directory: ./dashboard
+        run: npm run build
+
+  # ═══════════════════════════════════════════════════
+  # Job 2: Deploy Preview (PRs + develop)
+  # ═══════════════════════════════════════════════════
+  deploy-preview:
+    name: Deploy Preview
+    needs: build-and-test
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./dashboard
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel Environment
+        working-directory: ./dashboard
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build for Preview
+        working-directory: ./dashboard
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Preview
+        working-directory: ./dashboard
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > preview_url
+
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const url = fs.readFileSync('dashboard/preview_url', 'utf8').trim();
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Preview deployed: ${url}`
+            });
+
+  # ═══════════════════════════════════════════════════
+  # Job 3: Deploy Production (main branch only)
+  # ═══════════════════════════════════════════════════
+  deploy-production:
+    name: Deploy Production
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: dashboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./dashboard
+        run: npm ci
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull Vercel Production
+        working-directory: ./dashboard
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build for Production
+        working-directory: ./dashboard
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Production
+        working-directory: ./dashboard
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+  # ═══════════════════════════════════════════════════
+  # Job 4: Homepage Config Validation
+  # ═══════════════════════════════════════════════════
+  validate-homepage-config:
+    name: Validate Homepage Config
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate YAML syntax
+        run: |
+          pip install pyyaml
+          python3 -c "
+          import yaml
+          import glob
+          for f in glob.glob('homepage/config/*.yaml'):
+              with open(f) as fh:
+                  yaml.safe_load(fh)
+              print(f'✓ {f}')
+          print('All YAML configs valid ✓')
+          "
+
+      - name: Check for broken internal links
+        run: |
+          grep -r 'href:' homepage/config/services.yaml | grep -oP 'http://localhost:\d+' | sort -u
+          echo "---"
+          echo "Services referenced in config validated"

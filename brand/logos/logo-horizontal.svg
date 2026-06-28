@@ -1,0 +1,20 @@
+<svg viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5FF"/>
+      <stop offset="100%" style="stop-color:#7C4DFF"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <rect x="20" y="40" width="220" height="220" rx="40" fill="#1A1A2E"/>
+  <circle cx="130" cy="135" r="65" stroke="url(#hg)" stroke-width="8" fill="none"/>
+  <polygon points="114,110 114,160 156,135" fill="url(#hg)"/>
+  <rect x="55" y="210" width="48" height="34" rx="6" fill="#16213E" stroke="#00E5FF" stroke-width="1.5"/>
+  <rect x="104" y="210" width="48" height="34" rx="6" fill="#16213E" stroke="#7C4DFF" stroke-width="1.5"/>
+  <rect x="153" y="210" width="48" height="34" rx="6" fill="#16213E" stroke="#00E5FF" stroke-width="1.5"/>
+
+  <!-- Wordmark -->
+  <text x="280" y="120" font-family="Space Grotesk, Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="#F0F0F5">ULTIMATE HOME</text>
+  <text x="280" y="170" font-family="Space Grotesk, Inter, system-ui, sans-serif" font-size="42" font-weight="700" fill="url(#hg)">MEDIA CENTRE</text>
+  <text x="280" y="210" font-family="Inter, system-ui, sans-serif" font-size="18" fill="#78909C" letter-spacing="4">YOUR CONTENT • YOUR NETWORK • ZERO FEES</text>
+</svg>

@@ -1,0 +1,60 @@
+---
+# Media Centre - Quick Actions & Tools
+
+- QUICK ACTIONS:
+  - Restart All Services:
+      icon: material-symbols:restart-alt
+      href: http://pb-legion.tail587e7c.ts.net:5055/debug?type=restart
+      description: Restart stack
+  - Clear Completed Downloads:
+      icon: mdi:broom
+      href: http://pb-legion.tail587e7c.ts.net:8080/command?cmd=removecompleted
+      description: Clean qBittorrent
+  - Sync Quality Profiles:
+      icon: mdi:sync
+      href: http://pb-legion.tail587e7c.ts.net:8085/sync
+      description: Recyclarr sync
+
+- WIDGETS:
+  - Jellyfin Status:
+      icon: jellyfin
+      href: http://pb-legion.tail587e7c.ts.net:8096/web/index.html#!/dashboard.html
+      widget:
+        type: jellyfin
+        url: http://pb-legion.tail587e7c.ts.net:8096
+        key: YOUR_JELLYFIN_API_KEY
+  - Sonarr Queue:
+      icon: sonarr
+      href: http://pb-legion.tail587e7c.ts.net:8990
+      widget:
+        type: sonarr
+        url: http://pb-legion.tail587e7c.ts.net:8990
+        key: 95c31774b0204865a777ae5da1237d1a
+  - Radarr Queue:
+      icon: radarr
+      href: http://pb-legion.tail587e7c.ts.net:7878
+      widget:
+        type: radarr
+        url: http://pb-legion.tail587e7c.ts.net:7878
+        key: b3704dacee3846279960d10495dfa6dc
+
+- DOCKER LOGS:
+  - Autobrr Logs:
+      icon: autobrr
+      href: http://pb-legion.tail587e7c.ts.net:9696/logs
+  - Prowlarr Logs:
+      icon: prowlarr
+      href: http://pb-legion.tail587e7c.ts.net:9696/logs
+  - Seerr Logs:
+      icon: seerr
+      href: http://pb-legion.tail587e7c.ts.net:5055/logs
+
+- INDEXER MONITOR:
+  - Indexer Health:
+      icon: material-symbols:health-and-safety
+      href: http://pb-legion.tail587e7c.ts.net:9696/indexer
+      description: Check indexer status
+  - Torznab Feeds:
+      icon: mdi:rss
+      href: http://pb-legion.tail587e7c.ts.net:9696/indexer
+      description: Get feed URLs for Autobrr

@@ -1,0 +1,161 @@
+---
+# Homepage Widgets Configuration - Updated 2026-06-28
+# All URLs use container names for internal docker network communication
+
+- resources:
+    cpu: true
+    memory: true
+    disk: /
+
+- search:
+    provider: duckduckgo
+    target: _blank
+
+- welcome:
+    title: Hermes Media Centre
+    description: Ultimate Home Entertainment + Security + AI
+
+- datetime:
+    text_size: xl
+    format:
+      timeZone: Australia/Brisbane
+      hour12: false
+      time:   'HH:mm'
+      date: 'dddd, MMMM Do'
+
+- network:
+    interface: eth0
+
+# =============================================================================
+# MEDIA SERVICES
+# =============================================================================
+- jellyfin:
+    title: Jellyfin
+    url: http://jellyfin:8096
+    icon: jellyfin
+    description: Media streaming
+
+- sonarr:
+    title: Sonarr
+    url: http://sonarr:8989
+    icon: sonarr
+    description: TV show automation
+
+- radarr:
+    title: Radarr
+    url: http://radarr:7878
+    icon: radarr
+    description: Movie automation
+
+- prowlarr:
+    title: Prowlarr
+    url: http://prowlarr:9696
+    icon: prowlarr
+    description: Indexer management
+
+- bazarr:
+    title: Bazarr
+    url: http://bazarr:6767
+    icon: bazarr
+    description: Subtitle automation
+
+- qbittorrent:
+    title: qBittorrent
+    url: http://qbittorrent:8080
+    icon: qbittorrent
+    description: Torrent downloader
+
+- tautulli:
+    title: Tautulli
+    url: http://tautulli:8181
+    icon: tautulli
+    description: Analytics
+    key: a6b4e779da28473d924cc45b506194f5
+
+- jellystat:
+    title: Jellystat
+    url: http://jellystat:3000
+    icon: jellystat
+    description: Jellyfin stats
+
+# =============================================================================
+# GPU & TRANSCODING
+# =============================================================================
+- tdarr:
+    title: Tdarr
+    url: http://tdarr:8265
+    icon: tdarr
+    description: GPU transcoding (RTX 5090 NVENC/AV1/HEVC)
+
+# =============================================================================
+# SECURITY & AUTOMATION
+# =============================================================================
+- frigate:
+    title: Frigate NVR
+    url: http://frigate:8979
+    icon: frigate
+    description: AI camera security
+
+- mosquitto:
+    title: Mosquitto MQTT
+    url: http://mosquitto:9001
+    icon: mqtt
+    description: Message broker
+
+# =============================================================================
+# AI & MANAGEMENT
+# =============================================================================
+- open-webui:
+    title: Open WebUI
+    url: http://open-webui:3000
+    icon: open-webui
+    description: Ollama chat UI
+
+- obsidian-mcp:
+    title: Obsidian Vault
+    url: http://obsidian-mcp:27123
+    icon: obsidian
+    description: Knowledge base (MCP)
+
+# =============================================================================
+# TAILSCALE NETWORK — WHO'S WHERE
+# =============================================================================
+- bookmarks:
+    - Tailscale Network:
+        - pb-legion (This PC):
+            abbr: PL
+            href: http://100.79.214.107:3002
+            description: Windows · Sydney · Dashboard + Media
+        - pb-legion-1 (Home Server):
+            abbr: PL1
+            href: http://100.65.189.56
+            description: Linux · Sydney · Active
+        - gl-be3600 (Router):
+            abbr: GL
+            href: http://100.117.71.20
+            description: Linux · Sydney · GL.iNet Router
+        - ai (AI Server):
+            abbr: AI
+            href: http://100.85.241.127
+            description: Linux · Frankfurt · AI/Compute
+        - srv01 (Server):
+            abbr: S1
+            href: http://100.127.194.114
+            description: Windows · Sydney · Server
+        - Peter's Flip6:
+            abbr: F6
+            href: http://100.81.164.5
+            description: Android · Sydney · Mobile
+        - Peter's Moto G84:
+            abbr: MOTO
+            href: http://100.123.15.112
+            description: Android · Sydney · Mobile
+    - Quick Links:
+        - Tailscale Admin:
+            abbr: TS
+            href: https://login.tailscale.com/admin/machines
+            description: Manage Tailscale devices
+        - Uptime Kuma:
+            abbr: UK
+            href: http://100.79.214.107:3005
+            description: Service uptime monitoring

@@ -1,0 +1,154 @@
+# Homepage Dashboard - Updated 2026-06-25
+
+---
+- MEDIA PIPELINE:
+  - Prowlarr:
+      icon: prowlarr
+      tag: media
+      href: http://localhost:9696
+      description: Indexer manager
+      widget:
+        type: prowlarr
+        url: http://prowlarr:9696
+        key: 68ca5e426ed044b99d4fb417facb6e75
+
+  - Sonarr:
+      icon: sonarr
+      tag: media
+      href: http://localhost:8990
+      description: TV automation
+      widget:
+        type: sonarr
+        url: http://localhost:8990
+        key: 95c31774b0204865a777ae5da1237d1a
+
+  - Radarr:
+      icon: radarr
+      tag: media
+      href: http://localhost:7878
+      description: Movie automation
+      widget:
+        type: radarr
+        url: http://localhost:7878
+        key: b3704dacee3846279960d10495dfa6dc
+
+  - qBittorrent:
+      icon: qbittorrent
+      tag: download
+      href: http://localhost:8080
+      description: Torrent downloader
+      widget:
+        type: qbittorrent
+        url: http://localhost:8080
+        username: admin
+        password: Omnfxop09!
+
+  - Bazarr:
+      icon: bazarr
+      tag: media
+      href: http://localhost:6767
+      description: Subtitle automation
+
+- LIVE TV & ANALYTICS:
+  - Jellyfin:
+      icon: jellyfin
+      tag: media
+      href: http://localhost:8096
+      description: Media server
+      widget:
+        type: jellyfin
+        url: http://localhost:8096
+
+  - Tautulli:
+      icon: tautulli
+      tag: analytics
+      href: http://localhost:8181
+      description: Analytics
+      widget:
+        type: tautulli
+        url: http://localhost:8181
+        key: a6b4e779da28473d924cc45b506194f5
+
+  - Jellystat:
+      icon: jellystat
+      tag: analytics
+      href: http://localhost:3004
+      description: Statistics
+
+- SECURITY:
+  - Frigate:
+      icon: frigate
+      tag: security
+      href: http://localhost:5979
+      description: AI NVR & object detection
+
+  - Mosquitto:
+      icon: mqtt
+      tag: security
+      href: http://localhost:9001
+      description: MQTT broker
+
+- AI & KNOWLEDGE:
+  - Open WebUI:
+      icon: open-webui
+      tag: ai
+      href: http://localhost:3000
+      description: Ollama chat interface
+
+  - Obsidian Vault:
+      icon: obsidian
+      tag: ai
+      href: http://localhost:27124
+      description: Knowledge graph (MCP)
+
+- REQUESTS & AUTOMATION:
+  - Seerr:
+      icon: seerr
+      tag: media
+      href: http://localhost:5055
+      description: Media requests
+
+  - Autobrr:
+      icon: autobrr
+      tag: automation
+      href: http://localhost:7474
+      description: Instant grabs
+      widget:
+        type: autobrr
+        url: http://localhost:7474
+        key: bfb55cfd2c2fb8a109ca5893944e2104
+
+  - Recyclarr:
+      icon: recyclarr
+      tag: quality
+      href: http://localhost:8085
+      description: Quality profiles
+
+- TRANSCODING:
+  - Tdarr:
+      icon: tdarr
+      tag: transcode
+      href: http://localhost:8265
+      description: GPU transcoding (RTX 5090)
+      widget:
+        type: tdarr
+        url: http://tdarr:8265
+
+- UTILITIES:
+  - FlareSolverr:
+      icon: flaresolverr
+      tag: utility
+      href: http://localhost:8191
+      description: Cloudflare bypass
+
+  - SearXNG:
+      icon: searxng
+      tag: utility
+      href: http://localhost:8888
+      description: Search engine
+
+  - Threadfin:
+      icon: threadfin
+      tag: tv
+      href: http://localhost:34400
+      description: IPTV proxy
